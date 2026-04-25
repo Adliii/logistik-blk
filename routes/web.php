@@ -12,7 +12,7 @@ Route::get('/setup-kiela', function () {
         User::create([
             'name' => 'Kiela',
             'email' => 'kiela@gmail.com',
-            'password' => bcrypt('123456789')
+            'password' =>'123456789'
         ]);
         
         return 'Gudang MySQL siap, Bos! Akun berhasil dibuat.';
