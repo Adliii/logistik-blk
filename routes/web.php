@@ -13,7 +13,7 @@ Route::get('/setup-kiela', function () {
             $user = User::create([
                 'name' => 'Kiela',
                 'email' => 'kiela@gmail.com',
-                'password' => Hash::make('123456789')
+                'password' => '123456789'
             ]);
             
             return "SUKSES BERAT! Akun berhasil dibuat: " . $user->email;
