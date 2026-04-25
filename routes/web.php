@@ -2,18 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 Route::get('/setup-kiela', function () {
-        // 1. Eksekusi Migration
-        Artisan::call('migrate:fresh', ['--force' => true]);
-        
-        // 2. Bikin Akun Admin
-        User::create([
-            'name' => 'Kiela',
-            'email' => 'kiela@gmail.com',
-            'password' =>'123456789'
-        ]);
-        
-        return 'Gudang MySQL siap, Bos! Akun berhasil dibuat.';
+        try {
+            Artisan::call('migrate:fresh', ['--force' => true]);
+            
+            $user = User::create([
+                'name' => 'Kiela',
+                'email' => 'kiela@gmail.com',
+                'password' => Hash::make('123456789')
+            ]);
+            
+            return "SUKSES BERAT! Akun berhasil dibuat: " . $user->email;
+        } catch (\Exception $e) {
+            return "GAGAL TOTAL. Ini errornya: " . $e->getMessage();
+        }
     });
