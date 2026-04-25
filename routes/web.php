@@ -7,6 +7,7 @@ use App\Models\User;
 
 Route::get('/setup-kiela', function () {
         try {
+            Artisan::call('optimize:clear');
             Artisan::call('migrate:fresh', ['--force' => true]);
             
             $user = User::create([
